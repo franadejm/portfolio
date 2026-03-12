@@ -21,7 +21,7 @@ There are several things to notice in this code:
 3. Both messages printed to the user at the end of the loop announce failure, so the flag must be pritned out somewhere else.
 4. The instructions following the function call set ```eax``` to a seemingly arbitrary constant and then xor it with other values. If the goal was simply to produce a specific value in ```eax```, it could have been set directly in the initial ```mov``` instruction. Furthermore, the value of ```eax``` is used in a condition that determines which message is printed, implying it may change based on user input.
 
-Putting all these observations together with the knowledge that the  ```.text``` section of the executable is printable, it seems safe to assume that the function called after reading user credential signals success or failure by modifying the instructions following the call.
+Putting all these observations together with the knowledge that the  ```.text``` section of the executable is writeable, it seems safe to assume that the function called after reading user credential signals success or failure by modifying the instructions following the call. These instructions are likely decoded into code that prints the flag if the correct username and password are provided.
 
 ## Analyzing the Credential-Checking Function
 ### Displaying the function in graph mode
@@ -37,4 +37,5 @@ The function is quite long and complex, so I broke it down into several smaller 
 
 ![CRC32 code](screenshots/crc32.png) \
 *The CRC32 function used for input hashing*
+
 
