@@ -33,10 +33,11 @@ Because the jump is conditional, the disassembler interprets the following bytes
 ![Solved instruction](screenshots/graph_solved.png)
 
 ### Hashing the username and password
-The function is quite long and complex, so I broke it down into several smaller sections. At the beginning it creates a security cookie and places it on the stack. It then calculates the length of the username that it received as an argument and passes the username along with its length to another function. The return value of this function is then saved in a variable and the exact same procedure is executed for the password. Closer inspection of the called function reveals that it calculates a hash of a given string: it xors all characters of a given string with values from a lookup table and returns a value derived from the result. Looking up the first few values from the table revealed that it is most likely an implementation of the CRC32 checksum.
+The function is quite long and complex, so I broke it down into several smaller sections. At the beginning it creates a security cookie and places it on the stack. It then calculates the length of the username that it received as an argument and passes the username along with its length to another function. The return value of this function is then saved in a variable and the exact same procedure is executed for the password. Closer inspection of the called function reveals that it calculates a hash of a given string: it xors all characters of the string with values from a lookup table and returns a value derived from the result. Looking up the first few values from the table revealed that it is most likely an implementation of the CRC32 checksum.
 
 ![CRC32 code](screenshots/crc32.png) \
 *The CRC32 function used for input hashing*
+
 
 
 
