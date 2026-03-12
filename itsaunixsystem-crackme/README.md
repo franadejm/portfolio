@@ -28,7 +28,7 @@ Putting all these observations together with the knowledge that the  ```.text```
 The function that is called from main cannot be displayed in graph mode in IDA. This is caused by the following instructions:
 ![Problematic instruction](screenshots/graph_problem.png)
 
-Because the jump is conditional, the disassembler interprets the following bytes as code. However, this means that if the jump is taken, then it jumps into the middle of an existing instruction. IDA does not know how to display this in graph mode. We can fix this by manually setting the bytes after the conditional jump instruction to data and interpreting the bytes that the jump points to as code. This will allow us to analyze the function in graph mode and we can analyze what exactly happens when the jump is or is not taken later.
+Because the jump is conditional, the disassembler interprets the following bytes as code. However, this means that if the jump is taken, then it jumps into the middle of an existing instruction. IDA does not know how to display this in graph mode. I fixed this by manually setting the bytes after the conditional jump instruction to data and interpreting the bytes that the jump points to as code.
 
 ![Solved instruction](screenshots/graph_solved.png)
 
@@ -37,5 +37,6 @@ The function is quite long and complex, so I broke it down into several smaller 
 
 ![CRC32 code](screenshots/crc32.png) \
 *The CRC32 function used for input hashing*
+
 
 
